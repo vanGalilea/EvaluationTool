@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import BatchItem from './BatchItem'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 class BatchesContainer extends PureComponent {
   static PropTypes = {
@@ -26,4 +27,8 @@ class BatchesContainer extends PureComponent {
   }
 }
 
-export default BatchesContainer
+const mapStateToProps = ({ batches }) => ({
+  batches
+})
+
+export default connect(mapStateToProps)(BatchesContainer)
