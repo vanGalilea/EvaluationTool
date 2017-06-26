@@ -1,25 +1,21 @@
 import React, { PureComponent } from 'react'
-
+import BatchItem from './BatchItem'
+import PropTypes from 'prop-types'
 
 class BatchesContainer extends PureComponent {
+  static PropTypes = {
+    batches: PropTypes.array.isRequired,
+  }
+
   renderBatch(batch, index) {
-  return (
-    <article className="recipe">
-      <h1>{ batch.number }</h1>
-      <div>
-        <p>{ batch.startDate }</p>
-        <p>{ batch.endDate }</p>
-        <p>{ batch.students.count }</p>
-      </div>
-    </article>
-  )
-}
+    return <BatchItem key={ index } { ...batch } />
+  }
 
   render() {
     return(
       <div className="batches wrapper">
         <header>
-            <h2>Batches List:</h2>
+          <h2>Batches List:</h2>
         </header>
 
         <main>
