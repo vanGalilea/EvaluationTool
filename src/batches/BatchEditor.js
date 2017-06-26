@@ -65,8 +65,7 @@ class BatchEditor extends PureComponent {
           className="number"
           placeholder="Batch No."
           defaultValue={this.state.number}
-          onChange={this.updateNumber.bind(this)}
-          onKeyDown={this.updateNumber.bind(this)} />
+          onChange={this.updateNumber.bind(this)} />
 
         <input
           type="date"
