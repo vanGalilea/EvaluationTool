@@ -1,0 +1,11 @@
+header .cover {
+  height: 280px;
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
+  margin-bottom: 54px; }
+  header .cover img {
+    height: 280px; }
+
+header h1 {
+  margin: 20px 0; }

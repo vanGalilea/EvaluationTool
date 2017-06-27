@@ -5,7 +5,7 @@ import auth from 'feathers-authentication-client'
 import superagent from 'superagent'
 
 const host = 'http://localhost:3030'
-export const FEATHERS_TOKEN_KEY = 'batches123a'
+export const FEATHERS_TOKEN_KEY = 'batchesB8'
 
 const feathersClient = feathers()
   .configure(rest(host).superagent(superagent))
