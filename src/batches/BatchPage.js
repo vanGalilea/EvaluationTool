@@ -21,7 +21,7 @@ export class BatchPage extends PureComponent {
         <h4>{startDate}</h4>
         <h4>{endDate}</h4>
         <h5>Students List:</h5>
-        
+
       </div>
     )
   }
