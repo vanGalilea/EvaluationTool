@@ -1,4 +1,5 @@
 import client from './client'
+import { FEATHERS_TOKEN_KEY } from './client'
 
 class API {
   constructor() {
@@ -11,11 +12,19 @@ class API {
 
   authenticate(user) {
     const { email, password } = user
-    return this.app.authenticate(
-      Object.assign({}, { strategy: 'local' }, {
+    return this.app.authenticate({
+      strategy: 'local',
       email,
-      password,
-    }))
+      password
+    })
+    .then(response => {
+      console.log('Authenticated!', response);
+      return this.app.passport.verifyJWT(response.accessToken)
+    })
+    .then(payload => {
+      console.log('JWT Payload', payload);
+      return this.app.service('users').get(payload.userId);
+    })
   }
 
   signOut() {
