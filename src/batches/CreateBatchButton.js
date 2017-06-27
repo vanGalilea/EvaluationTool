@@ -6,7 +6,6 @@ import { replace } from 'react-router-redux'
 import { showError } from '../actions/loading'
 import createBatch from '../actions/batches/create'
 import RaisedButton from 'material-ui/RaisedButton'
-import StarIcon from 'material-ui/svg-icons/action/favorite'
 import './CreateBatchButton.css'
 
 class CreateBatchButton extends PureComponent {
@@ -22,8 +21,7 @@ class CreateBatchButton extends PureComponent {
         <Link to="/create-batch">
           <RaisedButton
             label="Create Batch"
-            primary={true}
-            icon={<StarIcon />} />
+            primary={true} />
         </Link>
       </div>
     )

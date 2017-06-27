@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchBatches from '../actions/batches/fetch'
 import StudentCard from './StudentCard'
+import AskQuestion from './AskQuestion'
 
 export class BatchPage extends PureComponent {
   static PropTypes = {
@@ -23,6 +24,7 @@ export class BatchPage extends PureComponent {
 
     return(
       <div className="batch page">
+        <AskQuestion { ...this.props }/>
         <h1>Batch No. {number}</h1>
         <h4>{startDate}</h4>
         <h4>{endDate}</h4>
