@@ -19,7 +19,7 @@ class BatchItem extends PureComponent {
         <div>
           <p>{ startDate }</p>
           <p>{ endDate }</p>
-          <p>number of students in batch: { !students ? "There are currently no students" : students.length  }</p>
+          <p>number of students in batch: { students.length }</p>
         </div>
       </article>
     )

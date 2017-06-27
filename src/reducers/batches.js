@@ -4,9 +4,10 @@ import { FETCHED_BATCHES } from '../actions/batches/fetch'
 export default (state = [], { type, payload } = {}) => {
   switch(type) {
     case FETCHED_BATCHES :
-     return [].concat(payload)
+     return [ ...payload ]
+
     case CREATE_BATCH :
-      return [Object.assign({}, payload)].concat(state)
+      return state.concat({ ...payload })
 
     default :
       return state
