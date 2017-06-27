@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BatchesContainer from './batches/BatchesContainer'
 import BatchEditor from './batches/BatchEditor'
 import Loading from './loading'
+import LoadErrorMessage from './loadErrorMessage'
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 // import muiTheme from './assets/styles/theme'
 // import PropTypes from 'prop-types'
@@ -19,6 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <LoadErrorMessage />
         <Loading />
         <BatchesContainer />
         <BatchEditor />
