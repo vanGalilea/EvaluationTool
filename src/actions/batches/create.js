@@ -20,8 +20,8 @@ export default (newBatch) => {
 
    backend.create(newBatch)
      .then((result) => {
-       dispatch({ type: APP_DONE_LOADING })
        dispatch({ type: LOAD_SUCCESS })
+       dispatch({ type: APP_DONE_LOADING })
 
        dispatch({
          type: CREATE_BATCH,
