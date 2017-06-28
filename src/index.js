@@ -21,7 +21,7 @@ ReactDOM.render(
         <IndexRoute component={BatchesContainer} />
         <Route path="/create-batch" component={BatchEditor} />
         <Route path="/batches/:batchNum" component={BatchPage} />
-        <Route path="/batches/:batchNum/students/:studentId" component={StudentPage} />
+        <Route path="/students/:studentId" component={StudentPage} />
         <Route path="/sign-in" component={SignIn} />
       </Route>
     </Router>

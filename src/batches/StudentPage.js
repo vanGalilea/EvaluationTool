@@ -1,51 +1,62 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import fetchBatches from '../actions/batches/fetch'
-import StudentCard from './StudentCard'
-import AskQuestion from './AskQuestion'
+import fetchStudents from '../actions/students/fetch'
+import ListItem from 'material-ui/List/ListItem'
+import Avatar from 'material-ui/Avatar'
+
+const style = {
+  height: 150,
+  width: 150,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+}
 
 export class StudentPage extends PureComponent {
-  static PropTypes = {
-    number: PropTypes.string.isRequired,
-  }
-
   componentWillMount() {
-    this.props.fetchBatches()
-  }
-
-  renderStudents(student, index) {
-    return <StudentCard key={index} { ...student } { ...this.props.params} />
+    this.props.fetchStudents()
   }
 
   render() {
-    const { number, startDate, endDate, students } = this.props
-    if(!students) return null
+    const { name, picture, evaluations, batchNum } = this.props
+
+    if(!name) return null
 
     return(
       <div className="batch page">
-        <AskQuestion { ...this.props }/>
-        <h1>Batch No. {number}</h1>
-        <h4>{startDate}</h4>
-        <h4>{endDate}</h4>
-        <h5>Students List:</h5>
-        { students.map(this.renderStudents.bind(this)) }
+
+        <h1>{name}</h1>
+        <ListItem
+          disabled={true}
+          leftAvatar={
+            <Avatar
+              src={picture}
+              size={75}
+              style={style}
+            />
+          }
+        >
+        </ListItem>
+
+        <h4>Batch number: {batchNum}</h4>
+        <h5>Evaluation History: </h5>
+        
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ batches}, { params }) => {
-  const student = batches.reduce((prev, next) => {
-    if (next._id === params.batchId) {
+const mapStateToProps = ({ students}, { params }) => {
+  const student = students.reduce((prev, next) => {
+    if (next._id === params.studentId) {
       return next
     }
     return prev
   }, {})
 
   return {
-    ...student
+    ...student,
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(StudentPage)
+export default connect(mapStateToProps, { fetchStudents })(StudentPage)
