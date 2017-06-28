@@ -11,18 +11,17 @@ class StudentEditor extends PureComponent {
 
     const { name, picture } = props
     const { batchNum } = props.params
-    debugger
 
     this.state = {
       name,
       picture,
       batchNum,
-      evaluations: {},
+      evaluations: null,
       errors: {},
     }
   }
 
-    updateName(event) {
+  updateName(event) {
     this.setState({
       name: this.refs.name.value
     })
