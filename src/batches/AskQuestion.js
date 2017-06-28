@@ -33,6 +33,7 @@ class AskQuestion extends PureComponent {
 
   evaluationsAverage (student) {
     const { evaluations } = student
+    if(evaluations === null) return "red"
     const colorsSum = evaluations.reduce((acc, evaluation)=> {
       return acc + evaluation.color
     }, 0)
