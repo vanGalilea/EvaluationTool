@@ -9,6 +9,7 @@ import BatchesContainer from './batches/BatchesContainer'
 import BatchPage from './batches/BatchPage'
 import StudentPage from './batches/StudentPage'
 import BatchEditor from './batches/BatchEditor'
+import StudentEditor from './batches/StudentEditor'
 import SignIn from './users/SignIn'
 import store, { history } from './store'
 import './index.css'
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route path="/batches/:batchNum" component={BatchPage} />
         <Route path="/students/:studentId" component={StudentPage} />
         <Route path="/sign-in" component={SignIn} />
+        <Route path="/batches/:batchNum/create-student" component={StudentEditor} />
       </Route>
     </Router>
   </Provider>,
