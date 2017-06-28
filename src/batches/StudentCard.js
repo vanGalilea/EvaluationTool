@@ -32,7 +32,7 @@ class StudentCard extends PureComponent {
   }
 
   render() {
-    const { name, picture, _id } = this.props
+    const { name, picture, _id, batchId } = this.props
 
     return(
       <Paper style={style2} zDepth={2} circle={false} >
@@ -46,11 +46,12 @@ class StudentCard extends PureComponent {
           />
         }
       >
-        <Link to={`/students/${_id}`}>{ name }</Link>
+        <Link to={`/batches/${batchId}/students/${_id}`}>{ name }</Link>
       </ListItem>
       </Paper>
     )
   }
 }
+
 
 export default StudentCard
