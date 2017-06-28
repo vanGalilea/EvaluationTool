@@ -1,13 +1,34 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import ListItem from 'material-ui/List/ListItem'
+import Avatar from 'material-ui/Avatar'
 import './CreateBatchButton.css'
+
+const style = {
+  height: 50,
+  width: 50,
+}
 
 class AskQuestion extends PureComponent {
   static propTypes = {
     students: PropTypes.array.isRequired,
   }
 
+  state = {
+    open: false,
+    luckyOne: "",
+  };
+
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
 
   evaluationsAverage (student) {
     const { evaluations } = student
@@ -43,7 +64,7 @@ class AskQuestion extends PureComponent {
        this.sortStudentsByColor()
      } else {
        const randIndex = Math.floor(Math.random() * chosenStudents.length)
-       window.alert(chosenStudents[randIndex].name)
+       this.setState({luckyOne: chosenStudents[randIndex]})
      }
   }
 
@@ -60,16 +81,44 @@ class AskQuestion extends PureComponent {
   }
 
   render() {
+      const actions = [
+        <FlatButton
+          label="Cancel"
+          primary={true}
+          onTouchTap={this.handleClose}
+        />,
+        <FlatButton
+          label="Submit"
+          primary={true}
+          disabled={false}
+          onTouchTap={this.handleClose}
+        />,
+      ];
 
-    return (
-      <div className="AskQuestion">
-          <RaisedButton
-            label="Ask a Question"
-            primary={true}
-            onClick={ this.sortStudentsByColor.bind(this) }/>
-      </div>
-    )
-  }
+      return (
+        <div>
+          <RaisedButton label="Modal Dialog" onTouchTap={this.handleOpen} onClick={this.sortStudentsByColor.bind(this)}/>
+          <Dialog
+            title="Dialog With Actions"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+          >
+          <ListItem
+            disabled={true}
+            leftAvatar={
+              <Avatar
+                src={this.state.luckyOne.picture}
+                size={75}
+                style={style}
+              />
+            }
+          ></ListItem>
+            <p>{this.state.luckyOne.name}</p>
+          </Dialog>
+        </div>
+      )
+    }
 }
 
 
