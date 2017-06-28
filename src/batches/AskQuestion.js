@@ -5,6 +5,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import ListItem from 'material-ui/List/ListItem'
 import Avatar from 'material-ui/Avatar'
+import { history } from '../store'
 import './CreateBatchButton.css'
 
 const style = {
@@ -32,6 +33,7 @@ class AskQuestion extends PureComponent {
 
   evaluationsAverage (student) {
     const { evaluations } = student
+    if(evaluations === null) return "red"
     const colorsSum = evaluations.reduce((acc, evaluation)=> {
       return acc + evaluation.color
     }, 0)
@@ -88,18 +90,19 @@ class AskQuestion extends PureComponent {
           onTouchTap={this.handleClose}
         />,
         <FlatButton
-          label="Submit"
+          label="Evaluate"
           primary={true}
           disabled={false}
           onTouchTap={this.handleClose}
+          onClick={()=>{history.push(`/students/${this.state.luckyOne._id}`)}}
         />,
       ];
 
       return (
         <div>
-          <RaisedButton label="Modal Dialog" onTouchTap={this.handleOpen} onClick={this.sortStudentsByColor.bind(this)}/>
+          <RaisedButton label="Ask a Question" onTouchTap={this.handleOpen} onClick={this.sortStudentsByColor.bind(this)}/>
           <Dialog
-            title="Dialog With Actions"
+            title="The lucky student is: "
             actions={actions}
             modal={true}
             open={this.state.open}

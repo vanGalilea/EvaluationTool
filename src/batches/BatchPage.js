@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import fetchBatches from '../actions/batches/fetch'
 import fetchStudents from '../actions/students/fetch'
 import StudentCard from './StudentCard'
+import CreateStudentButton from './CreateStudentButton'
 import AskQuestion from './AskQuestion'
 
 export class BatchPage extends PureComponent {
@@ -31,8 +32,8 @@ export class BatchPage extends PureComponent {
       <div className="batch page">
         <AskQuestion students={ studentsOfBatch }/>
         <h1>Batch No. {number}</h1>
-        <h4>{startDate}</h4>
-        <h4>{endDate}</h4>
+        <h4>{new Date(startDate).toDateString()} - {new Date(endDate).toDateString()}</h4>
+        <CreateStudentButton batchNum={number}/>
         <h5>Students List:</h5>
         { studentsOfBatch.map(this.renderStudents.bind(this)) }
       </div>
