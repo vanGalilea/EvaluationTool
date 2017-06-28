@@ -29,7 +29,7 @@ export class BatchPage extends PureComponent {
 
     return(
       <div className="batch page">
-        <AskQuestion { ...this.props.batch }/>
+        <AskQuestion students={ studentsOfBatch }/>
         <h1>Batch No. {number}</h1>
         <h4>{startDate}</h4>
         <h4>{endDate}</h4>
