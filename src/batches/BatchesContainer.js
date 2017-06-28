@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import fetchBatches from '../actions/batches/fetch'
 import CreateBatchButton from './CreateBatchButton'
 
+
 class BatchesContainer extends PureComponent {
   static PropTypes = {
     batches: PropTypes.array.isRequired,
