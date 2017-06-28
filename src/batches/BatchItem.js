@@ -11,15 +11,14 @@ class BatchItem extends PureComponent {
   }
 
   render() {
-    const { number, startDate, endDate, students, _id } = this.props
+    const { number, startDate, endDate } = this.props
 
     return(
       <article className="batch">
-        <Link to={`/batches/${_id}`}>Batch No.{ number }</Link>
+        <Link to={`/batches/${number}`}>Batch No.{ number }</Link>
         <div>
           <p>{ startDate }</p>
           <p>{ endDate }</p>
-          <p>number of students in batch: { students.length }</p>
         </div>
       </article>
     )

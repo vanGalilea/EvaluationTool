@@ -53,4 +53,5 @@ class StudentCard extends PureComponent {
   }
 }
 
+
 export default StudentCard
