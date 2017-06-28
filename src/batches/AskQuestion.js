@@ -4,16 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import './CreateBatchButton.css'
 
 class AskQuestion extends PureComponent {
-  constructor(props) {
-    super()
-
-    this.state = {
-      greenStudents: {},
-      yellowStudents: {},
-      redStudents: {},
-    }
-  }
-
   static propTypes = {
     students: PropTypes.array.isRequired,
   }
@@ -42,39 +32,30 @@ class AskQuestion extends PureComponent {
     }
   }
 
-  sortStudents() {
+  sortStudentsByColor() {
     const { students } = this.props
-    const greenStudents = students.filter((student)=>{
-       return this.evaluationsAverage(student) === "green"
+    const randColor = this.randomColor()
+    const chosenStudents = students.filter((student)=>{
+       return this.evaluationsAverage(student) === randColor
      })
 
-   const yellowStudents = students.filter((student)=>{
-      return this.evaluationsAverage(student) === "yellow"
-    })
-
-    const redStudents = students.filter((student)=>{
-       return this.evaluationsAverage(student) === "red"
-     })
-
-    this.setState({
-      greenStudents,
-      yellowStudents,
-      redStudents
-    })
-
+     if (chosenStudents.length < 1){
+       this.sortStudentsByColor()
+     } else {
+       const randIndex = Math.floor(Math.random() * chosenStudents.length)
+       window.alert(chosenStudents[randIndex].name)
+     }
   }
 
-  randomStudent() {
-    this.sortStudents()
-    const {greenStudents, yellowStudents, redStudents} = this.state
+  randomColor() {
     const randNumber = Math.random()
 
     if(randNumber < 0.49){
-      
+      return "red"
     } else if (randNumber > 0.82) {
-
+      return "green"
     } else {
-
+      return "yellow"
     }
   }
 
@@ -85,7 +66,7 @@ class AskQuestion extends PureComponent {
           <RaisedButton
             label="Ask a Question"
             primary={true}
-            onClick={ this.randomStudent.bind(this) }/>
+            onClick={ this.sortStudentsByColor.bind(this) }/>
       </div>
     )
   }
