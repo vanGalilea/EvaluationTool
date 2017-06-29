@@ -4,6 +4,7 @@ import fetchStudents from '../actions/students/fetch'
 import ListItem from 'material-ui/List/ListItem'
 import Avatar from 'material-ui/Avatar'
 import evaluationsAverage from './evaluationsAverage'
+import EvaluationEditor from './EvaluationEditor'
 import './StudentPage.css'
 
 const style = {
@@ -14,13 +15,14 @@ const style = {
   display: 'inline-block',
 }
 
+
 export class StudentPage extends PureComponent {
   componentWillMount() {
     this.props.fetchStudents()
   }
 
   render() {
-    const { name, picture, batchNum } = this.props
+    const { name, picture, batchNum, _id } = this.props
     if(!name) return null
 
     return(
@@ -42,6 +44,7 @@ export class StudentPage extends PureComponent {
         <h4>Batch number: {batchNum}</h4>
         <h5>Evaluation Average: </h5>
         <div className={ evaluationsAverage(this.props) }>  </div>
+        <EvaluationEditor studentId={_id} />
       </div>
     )
   }
