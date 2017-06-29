@@ -31,7 +31,6 @@ export class BatchPage extends PureComponent {
 
     return(
       <div className="batch page">
-        <ColorBar students={ studentsOfBatch }/>
         <AskQuestion students={ studentsOfBatch }/>
         <h1>Batch No. {number}</h1>
         <h4>{new Date(startDate).toDateString()} - {new Date(endDate).toDateString()}</h4>
@@ -62,3 +61,6 @@ const mapStateToProps = ({ batches, students}, { params }) => {
 }
 
 export default connect(mapStateToProps, { fetchBatches, fetchStudents })(BatchPage)
+
+
+// <ColorBar students={ studentsOfBatch }/>

@@ -22,7 +22,7 @@ export class StudentPage extends PureComponent {
   render() {
     const { name, picture, batchNum } = this.props
     if(!name) return null
-    
+
     return(
       <div className="batch page">
 
@@ -41,7 +41,7 @@ export class StudentPage extends PureComponent {
 
         <h4>Batch number: {batchNum}</h4>
         <h5>Evaluation Average: </h5>
-        <div className={ evaluationsAverage(this.props) }></div>
+        <div className={ evaluationsAverage(this.props) }>  </div>
       </div>
     )
   }
