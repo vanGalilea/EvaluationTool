@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import fetchStudents from '../actions/students/fetch'
 import ListItem from 'material-ui/List/ListItem'
 import Avatar from 'material-ui/Avatar'
+import evaluationsAverage from './evaluationsAverage'
 import './StudentPage.css'
 
 const style = {
@@ -18,32 +19,10 @@ export class StudentPage extends PureComponent {
     this.props.fetchStudents()
   }
 
-  evaluationsAverage (evaluations) {
-    const colorsSum = evaluations.reduce((acc, evaluation)=> {
-      return acc + evaluation.color
-    }, 0)
-
-    const average = Math.round(colorsSum/evaluations.length)
-
-    switch(average){
-      case 3 :
-        return "green"
-
-      case 2 :
-        return "yellow"
-
-      case 1 :
-        return "red"
-
-      default :
-        return null
-    }
-  }
-
   render() {
-    const { name, picture, evaluations, batchNum } = this.props
+    const { name, picture, batchNum } = this.props
     if(!name) return null
-
+    
     return(
       <div className="batch page">
 
@@ -62,7 +41,7 @@ export class StudentPage extends PureComponent {
 
         <h4>Batch number: {batchNum}</h4>
         <h5>Evaluation Average: </h5>
-        <div className={ this.evaluationsAverage }></div>
+        <div className={ evaluationsAverage(this.props) }></div>
       </div>
     )
   }

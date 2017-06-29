@@ -7,6 +7,7 @@ import ListItem from 'material-ui/List/ListItem'
 import Avatar from 'material-ui/Avatar'
 import { history } from '../store'
 import './CreateBatchButton.css'
+import evaluationsAverage from './evaluationsAverage'
 
 const style = {
   height: 50,
@@ -31,35 +32,11 @@ class AskQuestion extends PureComponent {
     this.setState({open: false});
   };
 
-  evaluationsAverage (student) {
-    const { evaluations } = student
-    if(evaluations === null) return "red"
-    const colorsSum = evaluations.reduce((acc, evaluation)=> {
-      return acc + evaluation.color
-    }, 0)
-
-    const average = Math.round(colorsSum/evaluations.length)
-
-    switch(average){
-      case 3 :
-        return "green"
-
-      case 2 :
-        return "yellow"
-
-      case 1 :
-        return "red"
-
-      default :
-        return null
-    }
-  }
-
   sortStudentsByColor() {
     const { students } = this.props
     const randColor = this.randomColor()
     const chosenStudents = students.filter((student)=>{
-       return this.evaluationsAverage(student) === randColor
+       return evaluationsAverage(student) === randColor
      })
 
      if (chosenStudents.length < 1){

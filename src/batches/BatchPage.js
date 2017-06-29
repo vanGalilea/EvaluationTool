@@ -6,6 +6,7 @@ import fetchStudents from '../actions/students/fetch'
 import StudentCard from './StudentCard'
 import CreateStudentButton from './CreateStudentButton'
 import AskQuestion from './AskQuestion'
+import ColorBar from './ColorBar'
 
 export class BatchPage extends PureComponent {
   static PropTypes = {
@@ -30,6 +31,7 @@ export class BatchPage extends PureComponent {
 
     return(
       <div className="batch page">
+        <ColorBar students={ studentsOfBatch }/>
         <AskQuestion students={ studentsOfBatch }/>
         <h1>Batch No. {number}</h1>
         <h4>{new Date(startDate).toDateString()} - {new Date(endDate).toDateString()}</h4>

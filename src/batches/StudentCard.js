@@ -50,7 +50,7 @@ class StudentCard extends PureComponent {
           }
         >
           <Link to={`/students/${_id}`}>{ name }</Link>
-          <FlatButton label="X Student" primary={true} onClick={()=> {this.props.deleteStudent(this.props)}} />
+          <FlatButton className="deleteButton" label="[Delete Student]" primary={true} onClick={()=> {this.props.deleteStudent(this.props)}} />
 
         </ListItem>
       </Paper>
