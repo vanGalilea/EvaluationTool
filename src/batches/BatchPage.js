@@ -6,7 +6,8 @@ import fetchStudents from '../actions/students/fetch'
 import StudentCard from '../students/StudentCard'
 import CreateStudentButton from '../students/CreateStudentButton'
 import AskQuestion from '../algorithm/AskQuestion'
-// import ColorBar from './ColorBar'
+import { history } from '../store'
+import ColorBar from './ColorBar'
 
 export class BatchPage extends PureComponent {
   static PropTypes = {
@@ -25,12 +26,13 @@ export class BatchPage extends PureComponent {
 
   render() {
     const { number, startDate, endDate } = this.props.batch
-    const { studentsOfBatch } = this.props
-
+    const { studentsOfBatch, signedIn } = this.props
     if(!number) return null
-
+    if(!signedIn) return history.replace('/sign-in')
+    
     return(
       <div className="batch page">
+        <ColorBar students={ studentsOfBatch }/>
         <AskQuestion students={ studentsOfBatch }/>
         <h1>Batch No. {number}</h1>
         <h4>{new Date(startDate).toDateString()} - {new Date(endDate).toDateString()}</h4>
@@ -42,7 +44,7 @@ export class BatchPage extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ batches, students}, { params }) => {
+const mapStateToProps = ({ batches, students, currentUser }, { params }) => {
   const studentsOfBatch = students.filter((student) => {
     return student.batchNum === parseInt(params.batchNum)
   })
@@ -57,6 +59,7 @@ const mapStateToProps = ({ batches, students}, { params }) => {
   return {
     batch,
     studentsOfBatch,
+    signedIn: !!currentUser && !!currentUser._id
   }
 }
 

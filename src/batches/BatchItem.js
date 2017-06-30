@@ -16,10 +16,7 @@ class BatchItem extends PureComponent {
     return(
       <article className="batch">
         <Link to={`/batches/${number}`}>Batch No.{ number }</Link>
-        <div>
-          <p>{ startDate }</p>
-          <p>{ endDate }</p>
-        </div>
+          <p>{ new Date(startDate).toDateString() } - { new Date(endDate).toDateString() }</p>
       </article>
     )
   }
