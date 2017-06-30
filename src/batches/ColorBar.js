@@ -18,10 +18,10 @@ export class ColorBar extends PureComponent {
     const { students } = this.props
     if(students.length < 1) return null
     const studentsCount = students.length
-    const red = this.filterStudentsByColor("red").length/studentsCount * 100
-    const yellow = this.filterStudentsByColor("yellow").length/studentsCount * 100
-    const green = this.filterStudentsByColor("green").length/studentsCount * 100
-    this.setState({ red: `width: ${red}`, yellow: `width: ${yellow}`, green: `width: ${green}` })
+    const red = (this.filterStudentsByColor("red").length/studentsCount * 100).toFixed(0)
+    const yellow = (this.filterStudentsByColor("yellow").length/studentsCount * 100).toFixed(0)
+    const green = (this.filterStudentsByColor("green").length/studentsCount * 100).toFixed(0)
+    this.setState({ red, yellow, green })
   }
 
   render() {
@@ -30,10 +30,13 @@ export class ColorBar extends PureComponent {
     this.calculatePrecentage()
     const { red, yellow, green } = this.state
     return(
-      <div className="Bar">
-        <p>Red students: {red}%</p>
-        <p>Yellow students: {yellow}%</p>
-        <p>Green students: {green}%</p>
+      <div>
+        <p>Color status based on average student color</p>
+        <div className="Bar">
+          <div className="Red" style={{width: `${red/2}%`}}>{red}%</div>
+          <div className="Yellow" style={{width: `${yellow/2}%`}}>{yellow}%</div>
+          <div className="Green" style={{width: `${green/2}%`}}>{green}%</div>
+        </div>
       </div>
     )
   }

@@ -1,8 +1,12 @@
-.BarRed {
-  background-color: red; }
-
-.BarYellow {
-  background-color: yellow; }
-
-.BarGreen {
-  background-color: green; }
+.Bar {
+  display: flex;
+  height: 25px;
+  text-align: center;
+  padding: 15px;
+  margin-left: 400px; }
+  .Bar .Red {
+    background-color: red; }
+  .Bar .Yellow {
+    background-color: yellow; }
+  .Bar .Green {
+    background-color: green; }
