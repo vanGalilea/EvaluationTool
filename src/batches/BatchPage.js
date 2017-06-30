@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchBatches from '../actions/batches/fetch'
 import fetchStudents from '../actions/students/fetch'
-import StudentCard from './StudentCard'
-import CreateStudentButton from './CreateStudentButton'
-import AskQuestion from './AskQuestion'
-import ColorBar from './ColorBar'
+import StudentCard from '../students/StudentCard'
+import CreateStudentButton from '../students/CreateStudentButton'
+import AskQuestion from '../algorithm/AskQuestion'
+// import ColorBar from './ColorBar'
 
 export class BatchPage extends PureComponent {
   static PropTypes = {

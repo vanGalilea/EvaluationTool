@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import fetchStudents from '../actions/students/fetch'
 import ListItem from 'material-ui/List/ListItem'
 import Avatar from 'material-ui/Avatar'
-import evaluationsAverage from './evaluationsAverage'
-import EvaluationEditor from './EvaluationEditor'
+import evaluationsAverage from '../evaluations/evaluationsAverage'
+import EvaluationEditor from '../evaluations/EvaluationEditor'
 import './StudentPage.css'
 
 const style = {

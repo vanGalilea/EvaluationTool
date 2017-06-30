@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import createEvaluation from '../actions/evaluations/create'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import './StudentEditor.css'
+import '../students/StudentEditor.css'
 
 const COLORS = [
   "red",
@@ -81,7 +81,7 @@ class EvaluationEditor extends PureComponent {
     const { errors, authorName } = this.state
     const { currentUser, createdAt} = this.props
     const disaledOrNot = !(currentUser._id === authorName)
-        
+
     return (
       <div className="editor">
       {disaledOrNot ? <p className="error">This evaluation can be edited only by its author</p> : null}

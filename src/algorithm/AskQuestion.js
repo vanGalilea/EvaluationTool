@@ -6,8 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import ListItem from 'material-ui/List/ListItem'
 import Avatar from 'material-ui/Avatar'
 import { history } from '../store'
-import './CreateBatchButton.css'
-import evaluationsAverage from './evaluationsAverage'
+import evaluationsAverage from '../evaluations/evaluationsAverage'
 
 const style = {
   height: 50,
