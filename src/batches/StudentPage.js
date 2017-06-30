@@ -21,9 +21,22 @@ export class StudentPage extends PureComponent {
     this.props.fetchStudents()
   }
 
+  getTodaysEvaluation(evaluations) {
+    if (evaluations === null) return {}
+    return evaluations.reduce((prev, next) => {
+      if (new Date(next.createdAt).toDateString() === new Date().toDateString()) {
+        return next
+      }
+      return prev
+    }, {})
+  }
+
   render() {
-    const { name, picture, batchNum, _id } = this.props
+    const { name, picture, batchNum, _id, evaluations } = this.props
     if(!name) return null
+
+    const todaysEvaluation = this.getTodaysEvaluation(evaluations)
+
 
     return(
       <div className="batch page">
@@ -42,9 +55,14 @@ export class StudentPage extends PureComponent {
         </ListItem>
 
         <h4>Batch number: {batchNum}</h4>
-        <h5>Evaluation Average: </h5>
-        <div className={ evaluationsAverage(this.props) }>  </div>
-        <EvaluationEditor studentId={_id} />
+        { evaluations !== null ?
+          <div>
+            <p>Evaluation Average:</p>
+            <div className={ evaluationsAverage(this.props) } />
+          </div> :
+          <p>No evaluations yet</p> }
+
+        <EvaluationEditor studentId={_id} {...todaysEvaluation} />
       </div>
     )
   }

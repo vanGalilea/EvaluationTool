@@ -6,22 +6,22 @@ import 'medium-editor/dist/css/themes/default.css'
 import './StudentEditor.css'
 
 const COLORS = [
-  "green",
+  "red",
   "yellow",
-  "red"
+  "green",
 ]
 
 class EvaluationEditor extends PureComponent {
   constructor(props) {
     super()
 
-    const {color, remarks } = props
     const { currentUser } = props
-
+    let {color, remarks, authorName } = props
+    if (!authorName) authorName = currentUser._id
     this.state = {
       color,
       remarks,
-      authorName: currentUser._id,
+      authorName,
       errors: {},
     }
   }
@@ -68,9 +68,9 @@ class EvaluationEditor extends PureComponent {
   }
 
   saveEvaluation() {
-    const { studentId } = this.props
-    const { color, remarks, authorName } = this.state
-    const evaluation = { color, remarks, authorName }
+    const { studentId, currentUser } = this.props
+    const { color, remarks } = this.state
+    const evaluation = { color, remarks, authorName:currentUser._id }
 
     if (this.validate(evaluation)) {
       this.props.createEvaluation(evaluation, studentId)
@@ -78,14 +78,25 @@ class EvaluationEditor extends PureComponent {
   }
 
   render() {
-    const { errors } = this.state
+    const { errors, authorName, remarks } = this.state
+    const { currentUser } = this.props
+    const disaledOrNot = !(currentUser._id === authorName)
 
     return (
       <div className="editor">
+      {disaledOrNot ? <p className="error">This evaluation can be edited only by its author</p> : null}
+      {!!remarks ? <p className="error">An evaluation for today is already been made</p> : null}
         <p>Evaluate student:</p>
-        {COLORS.map((color) => {
+        {COLORS.map((color, index) => {
             return <label key={color} htmlFor={color}>
-              <input id={color} type="radio" name="color" value={color} onChange={this.updateColor.bind(this)} />
+              <input
+                id={color}
+                type="radio"
+                name="color"
+                disabled={disaledOrNot}
+                checked={this.state.color === index+1}
+                value={color}
+                onChange={this.updateColor.bind(this)} />
               {color}
             </label>
           })}
@@ -96,6 +107,7 @@ class EvaluationEditor extends PureComponent {
           type="text"
           ref="remarks"
           className="remarks"
+          disabled={disaledOrNot}
           placeholder="Fill in your evaluation remarks"
           defaultValue={this.state.remarks}
           onChange={this.updateRemarks.bind(this)}
@@ -104,13 +116,17 @@ class EvaluationEditor extends PureComponent {
         { errors.remarks && <p className="error">{ errors.remarks }</p> }
 
         <div className="actions">
-          <button className="primary" onClick={this.saveEvaluation.bind(this)}>Save</button>
+          <button
+            className="primary"
+            disabled={disaledOrNot}
+            onClick={this.saveEvaluation.bind(this)}>Save</button>
+
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({ currentUser })
+const mapStateToProps = ({ students, currentUser }) => ({ students, currentUser })
 
 export default connect(mapStateToProps, {createEvaluation})(EvaluationEditor)

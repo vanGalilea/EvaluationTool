@@ -40,7 +40,6 @@ class StudentCard extends PureComponent {
 
     const color = evaluations[evaluations.length-1].color
 
-
     switch(color){
       case 3 :
         return "green"
