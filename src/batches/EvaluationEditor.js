@@ -78,14 +78,14 @@ class EvaluationEditor extends PureComponent {
   }
 
   render() {
-    const { errors, authorName, remarks } = this.state
-    const { currentUser } = this.props
+    const { errors, authorName } = this.state
+    const { currentUser, createdAt} = this.props
     const disaledOrNot = !(currentUser._id === authorName)
-
+        
     return (
       <div className="editor">
       {disaledOrNot ? <p className="error">This evaluation can be edited only by its author</p> : null}
-      {!!remarks ? <p className="error">An evaluation for today is already been made</p> : null}
+      {new Date(createdAt) < new Date() ? <p className="error">An evaluation for today is already been made</p> : null}
         <p>Evaluate student:</p>
         {COLORS.map((color, index) => {
             return <label key={color} htmlFor={color}>
